@@ -1,0 +1,36 @@
+- class_name: 生产力
+  description: 提升自己生产效率的硬件设备
+  equipment_list:
+    - name: 群晖 DS918+
+      specification: 黑裙，性价比更高了😜
+      description: 很棒的网络存储解决方案
+      # image: https://7.isyangs.cn/1/65eb3d5f8057b-1.png
+    - name: iPhone 11
+      specification: 红改黑色 / 256GB
+      description: 修一修，还能用
+      # image: https://chevereto.maimaioo.top/images/2025/04/12/iPhone-11.jpg
+      # link: https://support.apple.com/kb/SP832?locale=zh_CN
+    - name: 黑苹果主机
+      specification: i3-6100/32G RAM/RX470
+      description: 花小钱，享受苹果系统
+      # image: https://7.isyangs.cn/1/65eb3d70c59d9-1.png
+      # link: https://support.apple.com/kb/SP832?locale=zh_CN
+    - name: 服务器
+      specification: e3邪教/64G RAM/Tesla P4+3008直通卡
+      description: 进可跑AI，退可做NAS，但我选择用PVE来两手抓
+      # image: https://7.isyangs.cn/1/65eb3d70c59d9-1.png
+      # link: https://support.apple.com/kb/SP832?locale=zh_CN
+
+- class_name: 出行
+  description: 用来出行的实物及设备
+  equipment_list:
+    - name: AirPods Pro
+      specification: 华强北版
+      description: 可以说是非常强的平替耳机了，有需要可联系
+      # image: https://chevereto.maimaioo.top/images/2025/04/12/Airports-Pro.jpg
+      # link: https://www.apple.com.cn/airpods-pro/
+    - name: Apple Watch SE
+      specification: 蜂窝版
+      description: 苹果生态中不可缺少的一环
+      # image: https://chevereto.maimaioo.top/images/2025/04/12/Apple-Watch-SE.png
+      # link: https://support.apple.com/kb/SP832?locale=zh_CN
