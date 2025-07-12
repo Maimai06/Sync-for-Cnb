@@ -1,0 +1,263 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>腾讯云境外Linux轻量云服务器刷Windows系统 | GG.咕咕の备忘录</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.png"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=3.0.18"><!-- inject head--><link rel="canonical" href="http://hexo.maimaioo.top/2023/03/19/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F/index.html"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="2025.04.09更新为啥又更新了这篇文章?因为之前命令里面那个pe镜像的地址失效了，于是这段时间我上网冲浪找了个打过相应驱动&amp;amp;精简过的Firpe，但里面缺了一点需要的工具（例如：迅雷下载、浏览器、WinNTSetup），所以花了点时间添加了进去。还有一件事，原来iso镜像的磁力链接被修改"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="GG.咕咕の备忘录"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.png"><link rel="apple-touch-icon" href="/img/pwa/favicon.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.18' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>let mdate = "4-4,7-7,9-18,12-13";
+mdate = (mdate.split(","));
+let ndate = new Date();
+for (let i of mdate) {
+    if (i === (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+        document.documentElement.classList.add('memorial');
+    }
+}
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+          },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-03-19 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: ["你一定可以的"],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: {"jump":"404 Not Found","back":"ヾ(≧∇≦*)ゝ你终于回来了"},
+    expire: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: false,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><!-- universe--><!-- background img--><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux云服务器<sup>1</sup></a><a href="/tags/note/">note<sup>1</sup></a><a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%A2%83%E5%A4%96Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">腾讯云 境外Linux云服务器<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2023/11/"><span class="date">2023/11</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2023/09/"><span class="date">2023/09</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2023/06/"><span class="date">2023/06</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2023/03/"><span class="date">2023/03</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>全部文章</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/equipment/"><i class="solitude  fas fa-laptop"></i><span>我的装备</span></a></li><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于我</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux云服务器<sup>1</sup></a><a href="/tags/note/">note<sup>1</sup></a><a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%A2%83%E5%A4%96Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">腾讯云 境外Linux云服务器<sup>1</sup></a></div></div><span class="sidebar-menu-item-title">网站信息</span><div class="webinfo"><div class="webinfo-item"><div class="item-name">全站字数 :</div><div class="item-count">6.4k</div></div></div></div></div><!-- keyboard--><!-- righhtside--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">GG.咕咕の备忘录</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">腾讯云境外Linux轻量云服务器刷Windows系统</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>全部文章</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/equipment/"><i class="solitude  fas fa-laptop"></i><span>我的装备</span></a></li><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于我</span></a></li></ul></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://chevereto.maimaioo.top/images/2025/04/07/0000.jpg" alt="腾讯云境外Linux轻量云服务器刷Windows系统"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%A2%83%E5%A4%96Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>腾讯云 境外Linux云服务器</span></a></div></div></div></div><h1 class="post-title">腾讯云境外Linux轻量云服务器刷Windows系统</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-wordcount"><i class="post-meta-icon solitude fas fa-file-word" title="文章字数"></i><span class="word-count">1.9k</span><span class="post-meta-separator"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content article-container"><h1 id="2025-04-09更新"><a href="#2025-04-09更新" class="headerlink" title="2025.04.09更新"></a>2025.04.09更新</h1><h2 id="为啥又更新了这篇文章"><a href="#为啥又更新了这篇文章" class="headerlink" title="为啥又更新了这篇文章?"></a>为啥又更新了这篇文章?</h2><p>因为之前命令里面那个pe镜像的地址失效了，于是这段时间我上网冲浪找了个打过相应驱动&amp;精简过的Firpe，但里面缺了一点需要的工具（例如：迅雷下载、浏览器、WinNTSetup），所以花了点时间添加了进去。还有一件事，原来iso镜像的磁力链接被修改了，我已经再文档里更新&amp;转存了一份到了我的云盘上。至于WinNTSetup里面怎么配置，还是这张图片。<img src="https://chevereto.maimaioo.top/images/2025/04/03/WinNTSetup.png" alt="WinNTSetup.png"><br>新pe镜像优点：内置kvm驱动，无需手动打驱动以下载镜像。内置文档内所需工具，无需再另外下载。</p>
+<h2 id="更新后的命令："><a href="#更新后的命令：" class="headerlink" title="更新后的命令："></a>更新后的命令：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line">apt-get install wget grub2 grub-imageboot -y &amp;&amp; mkdir /boot/images/ &amp;&amp; wget --no-check-certificate -O /boot/images/mfslinux.iso https://d.maimaioo.top/p/TXLighthousecos/CloudServer/Win10PE_KVM_FIR.iso &amp;&amp; sed -i &#x27;s/GRUB_DEFAULT=0/GRUB_DEFAULT=2/g&#x27; /etc/default/grub &amp;&amp; update-grub2 &amp;&amp; reboot</span><br></pre></td></tr></table></figure>
+<h2 id="磁力链接："><a href="#磁力链接：" class="headerlink" title="磁力链接："></a>磁力链接：</h2><hr>
+<h1 id="2023-03-26更新"><a href="#2023-03-26更新" class="headerlink" title="2023.03.26更新"></a>2023.03.26更新</h1><h2 id="缘起："><a href="#缘起：" class="headerlink" title="缘起："></a>缘起：</h2><p>前段时间我投了一篇用pe来刷腾讯云境外Linux服务器的专栏，当时我就想，那有没有其他的方法可以刷Windows呢。</p>
+<h2 id="前期准备工作："><a href="#前期准备工作：" class="headerlink" title="前期准备工作："></a>前期准备工作：</h2><p>一台装着Debian11的境外Linux服务器(境内的没什么意思，可以直接换成Windows)，一台正常上网的电脑，一颗敢于去折腾的心。</p>
+<h2 id="Linux端用到的命令："><a href="#Linux端用到的命令：" class="headerlink" title="Linux端用到的命令："></a>Linux端用到的命令：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt install grub2 grub-imageboot -y &amp;&amp; \</span><br><span class="line">mkdir -p /boot/images/ &amp;&amp; \</span><br><span class="line">wget --no-check-certificate -O /boot/images/mfslinux.iso https://mfsbsd.vx.sk/files/iso/mfslinux/mfslinux-0.1.10-f9c75a4.iso &amp;&amp; \</span><br><span class="line">sed -i &#x27;s/GRUB_DEFAULT=0/GRUB_DEFAULT=2/g&#x27; /etc/default/grub &amp;&amp; \</span><br><span class="line">update-grub2</span><br><span class="line">reboot</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>及刷入Windows的相关命令</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Windows Server 2019</span></span><br><span class="line">opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/cn_win2019.xz&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Windows Server 2016</span></span><br><span class="line">opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/cn_win2016.xz&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Windows Server 2012</span></span><br><span class="line">opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/cn_win2012r2.xz&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="开始折腾："><a href="#开始折腾：" class="headerlink" title="开始折腾："></a>开始折腾：</h2><h3 id="安装恢复系统（系统默认用户名：root，密码：mfsroot）："><a href="#安装恢复系统（系统默认用户名：root，密码：mfsroot）：" class="headerlink" title="安装恢复系统（系统默认用户名：root，密码：mfsroot）："></a>安装恢复系统（系统默认用户名：root，密码：mfsroot）：</h3><h4 id="1-通过ssh连接到服务器"><a href="#1-通过ssh连接到服务器" class="headerlink" title="1.通过ssh连接到服务器"></a>1.通过ssh连接到服务器</h4><h4 id="2-在终端中输入’sudo-i’回车切换到root用户"><a href="#2-在终端中输入’sudo-i’回车切换到root用户" class="headerlink" title="2.在终端中输入’sudo -i’回车切换到root用户"></a>2.在终端中输入’sudo -i’回车切换到root用户</h4><h4 id="3-然后输入以下这段命令，等待执行完毕重启服务器"><a href="#3-然后输入以下这段命令，等待执行完毕重启服务器" class="headerlink" title="3.然后输入以下这段命令，等待执行完毕重启服务器"></a>3.然后输入以下这段命令，等待执行完毕重启服务器</h4><p>(可以在服务器控制页面重启，也可以在终端里用’reboot’命令重启) </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt update &amp;&amp; apt install grub2 grub-imageboot -y &amp;&amp; \</span><br><span class="line">mkdir -p /boot/images/ &amp;&amp; \</span><br><span class="line">wget --no-check-certificate -O /boot/images/mfslinux.iso https://mfsbsd.vx.sk/files/iso/mfslinux/mfslinux-0.1.10-f9c75a4.iso &amp;&amp; \</span><br><span class="line">sed -i &#x27;s/GRUB_DEFAULT=0/GRUB_DEFAULT=2/g&#x27; /etc/default/grub &amp;&amp; \</span><br><span class="line">update-grub2</span><br></pre></td></tr></table></figure>
+
+<h3 id="执行安装命令："><a href="#执行安装命令：" class="headerlink" title="执行安装命令："></a>执行安装命令：</h3><p>（在这里我提供三个系统的命令，大家按需选择）</p>
+<p>Windows Server 2012 R2</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/cn_win2012r2.xz&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</span><br></pre></td></tr></table></figure>
+
+<p>Windows Server 2016</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/cn_win2016.xz&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</span><br></pre></td></tr></table></figure>
+
+<p>Windows Server 2019</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/cn_win2019.xz&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</span><br></pre></td></tr></table></figure>
+
+<p>运行完毕后重启服务器，进入到Windows系统。</p>
+<h2 id="后记："><a href="#后记：" class="headerlink" title="后记："></a>后记：</h2><p>server系统默认开了rdp（微软自家的远程桌面），用户是：Administrator，密码都是：Teddysun.com。由于是用vhd克隆，所以在装完系统后C盘会比原先小，需要到磁盘管理里”拓展卷“进行分区的扩大。这里不单单可以刷server，还有其他的win系统（详情可以去<a target="_blank" rel="noopener" href="https://dl.lamp.sh/vhd%E6%9F%A5%E7%9C%8B%EF%BC%89%EF%BC%8C%E8%A6%81%E6%B3%A8%E6%84%8F%E4%B8%80%E7%82%B9%EF%BC%9A%E6%A0%B9%E6%8D%AE%E8%87%AA%E5%B7%B1%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%BC%95%E5%AF%BC%E6%96%B9%E5%BC%8F%E9%80%89%E6%8B%A9%E9%95%9C%E5%83%8F%EF%BC%88%E4%BC%A0%E7%BB%9Fbios%E6%88%96uefi%EF%BC%89%E3%80%82">https://dl.lamp.sh/vhd查看），要注意一点：根据自己服务器引导方式选择镜像（传统bios或uefi）。</a></p>
+<h2 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h2><p>阿里云也适用此教程（但不能根据此教程刷winserver2012），刷入其他镜像按下面格式就行（将xxx替换成刷的目录）</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/xxx&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</span><br></pre></td></tr></table></figure>
+
+<p>举个栗子：如果要刷windows11，就输入<code>opkg update &amp;&amp; opkg install pv &amp;&amp; wget -O- &quot;https://dl.lamp.sh/vhd/zh-cn_windows11_22h2.xz&quot; --no-check-certificate | xzcat | pv | dd of=/dev/vda</code></p>
+<hr>
+<h1 id="2023-03-19更新"><a href="#2023-03-19更新" class="headerlink" title="2023.03.19更新"></a>2023.03.19更新</h1><h2 id="前期准备："><a href="#前期准备：" class="headerlink" title="前期准备："></a>前期准备：</h2><p>1台境外Linux服务器，一台能上网的电脑，一颗敢于折腾的心</p>
+<h2 id="大致流程："><a href="#大致流程：" class="headerlink" title="大致流程："></a>大致流程：</h2><p>1、Linux系统选择安装Ubuntu 18.04.1 LTS版本<br>2、用ssh安装pe系统<br>3、进入pe系统刷写镜像</p>
+<h2 id="Linux端用到的命令：-1"><a href="#Linux端用到的命令：-1" class="headerlink" title="Linux端用到的命令："></a>Linux端用到的命令：</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo su</span><br><span class="line">apt-get install wget grub2 grub-imageboot -y &amp;&amp; mkdir /boot/images/ &amp;&amp; wget --no-check-certificate -O /boot/images/mfslinux.iso http://xcloud.yxdzltw.com/file_id/627979e99a66c32592304bbdbac0947b5b872c05/Win7PE_KVM_V2.iso &amp;&amp; sed -i &#x27;s/GRUB_DEFAULT=0/GRUB_DEFAULT=2/g&#x27; /etc/default/grub &amp;&amp; update-grub2 &amp;&amp; reboot</span><br></pre></td></tr></table></figure>
+
+<h2 id="操作流程："><a href="#操作流程：" class="headerlink" title="操作流程："></a>操作流程：</h2><p>1、用腾讯云的一键登录登录到要刷Windows系统的煮鸡中<br>2、输入命令 <code>sudo su</code> 回车切换到root之后输入命令后等待断开连接<br>3、使用vnc登录到服务器中会发现目前系统变成了一个win7的pe系统，此时凡事不要慌，先把驱动打上来驱动一些必要的组件（驱动网卡）打开qudong文件夹运行1.bat安装网卡驱动才能正常上网<br>4、分区，打开桌面上的分区工具，对服务器的系统盘进行重新分区or格式化（原配置中如果系统盘大小低于50G的建议花点钱临时组个10~20G的高性能云硬盘挂载到轻量云上临时存放数据，如果大于50G可以在系统盘中分10G左右的空间存放系统镜像及安装工具）<br>5、接下来我们需要下载镜像和工具，镜像我这边用的是Windows_Server_2012R2_DataCenter_CN_cxthhhhh.com_v4.29_with_Full_Virtualization_Drive.iso（一位群友提供的，磁力链接在文章结尾），打开桌面上的software文件夹中的“Thundermini”，将磁力链接复制进去下载。工具用的是WinNTSetup（网上x86的版本，下载链接在文章结尾）。<br>6、用pe系统中自带的Imdisk软件将iso镜像挂载到虚拟光驱，打开下载好的WinNTSetup，里面的参数按照我配图的参数（上面我已经尽可能注明清楚）照着调就行，基本不用改动。调好后点击“开始安装“在弹出的页面里勾选上“安装成功后自动重新启动计算机”（也可以不勾，不勾的话要自己手动重启，所以建议勾上）后点确定开始安装系统。<br><img src="https://chevereto.maimaioo.top/images/2025/04/03/WinNTSetup.png" alt="WinNTSetup.png">7、开始安装后就可以想干啥干啥，因为到用户登录之前都不需要进行任何操作。<br>8、我提供的系统镜像中登录密码默认为：“cxthhhhh.com”，进入系统后第一件事是改密码！改密码！改密码！（重要的事情说三遍）。<br>9、开始使用Windows server 2012 r2 。☆<em>: .｡. o(≧▽≦)o .｡.:</em>☆。</p>
+<h2 id="作者有话想说："><a href="#作者有话想说：" class="headerlink" title="作者有话想说："></a>作者有话想说：</h2><p>这篇文档只适用于腾讯云的云服务器，阿里云的云服务器作者在折腾中，折腾成功了再写。如果刷机有报错，请自行百度解决，如果我自己遇到了的话会补充上来。其他系统也适用，前提是iso格式镜像且里面包含着virtio驱动。用ssh刷Windows(同腾讯云)的文档已经在写了✍，敬请期待。</p>
+<h2 id="镜像链接和工具下载链接："><a href="#镜像链接和工具下载链接：" class="headerlink" title="镜像链接和工具下载链接："></a>镜像链接和工具下载链接：</h2><p><a target="_blank" rel="noopener" href="https://odc.cxthhhhh.com/p/SyStem-OS/Windows-ISO-WIM-ESD-Install/Windows_Server_2012R2_DataCenter_CN_cxthhhhh.com_v4.29_with_Full_Virtualization_Drive.iso?sign=XtdlhGJ-HSg35X8C08Ln_z5fY3orkasmyVNLU18YBBo=:0">Windows_Server_2012R2_DataCenter_CN_cxthhhhh.com_v4.29_with_Full_Virtualization_Drive.iso by cxthhhhh.com</a><br>工具链接：“<a target="_blank" rel="noopener" href="https://www.xitongzhijia.net/soft/20577.html">WinNTSetup下载_WinNTSetup绿色汉化版5.2.6 - 系统之家 (xitongzhijia.net)</a>”在历史版本中选择v4.1.0版本下载</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">GG.咕咕</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title">感谢您的赞赏</span><ul class="reward-group"><li class="reward-item"><a href="/"><img class="post-qr-code-img nolazyload" src="https://chevereto.maimaioo.top/images/2025/04/08/wx.jpg" alt="WeChat" style="border-color: var(--efu-black)"></a><div class="post-qr-code-desc">WeChat</div></li><li class="reward-item"><a href="/"><img class="post-qr-code-img nolazyload" src="https://chevereto.maimaioo.top/images/2025/04/08/zfb.jpg" alt="Alipay" style="border-color: var(--efu-black)"></a><div class="post-qr-code-desc">Alipay</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec">由于您的支持，我才能够有坚持写作的动力。</div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=http%3A%2F%2Fhexo.maimaioo.top%2F2023%2F03%2F19%2F%25E8%2585%25BE%25E8%25AE%25AF%25E4%25BA%2591%25E5%25A2%2583%25E5%25A4%2596Linux%25E8%25BD%25BB%25E9%2587%258F%25E4%25BA%2591%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E5%2588%25B7Windows%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F&amp;desc=undefined&amp;summary=undefined&amp;site=%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F&amp;pics=https%3A%2F%2Fchevereto.maimaioo.top%2Fimages%2F2025%2F04%2F07%2F0000.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fhexo.maimaioo.top%2F2023%2F03%2F19%2F%25E8%2585%25BE%25E8%25AE%25AF%25E4%25BA%2591%25E5%25A2%2583%25E5%25A4%2596Linux%25E8%25BD%25BB%25E9%2587%258F%25E4%25BA%2591%25E6%259C%258D%25E5%258A%25A1%25E5%2599%25A8%25E5%2588%25B7Windows%25E7%25B3%25BB%25E7%25BB%259F%2F&amp;title=%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F&amp;pic=https%3A%2F%2Fchevereto.maimaioo.top%2Fimages%2F2025%2F04%2F07%2F0000.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;http://hexo.maimaioo.top/2023/03/19/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">GG.咕咕の备忘录</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%A2%83%E5%A4%96Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>腾讯云 境外Linux云服务器<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2023/06/17/network-shared-printer/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">本地USB打印机网络共享</div></div></a></div></nav></div></main><footer id="footer"><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By&nbsp;<a class="footer-bar-link" href="/"><img class="author-avatar" src="/img/pwa/favicon.png">GG.咕咕</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="琼ICP备2024039522号-1"><span class="beian-name">琼ICP备2024039522号-1</span></a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude">主题：Solitude</a></div></div></div></div></footer></div><!-- right_menu--><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div><!-- inject body--><div><script src="/js/utils.js?v=3.0.18"></script><script src="/js/main.js?v=3.0.18"></script><script src="/js/third_party/waterfall.min.js?v=3.0.18"></script><script src="https://fastly.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/tw_cn.js?v=3.0.18"></script><script src="https://fastly.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://fastly.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><script src="/js/right_menu.js?v=3.0.18"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- google adsense--><!-- search--><!-- music--></body></html>
+        <script>
+            const posts = ["2023/11/16/Vps-DD-A-new-OS/","2023/09/10/nginx-emerg-open/","2023/09/10/Aliyun-Linux-DD-WinServer/","2023/06/17/network-shared-printer/","2023/03/19/腾讯云境外Linux轻量云服务器刷Windows系统/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

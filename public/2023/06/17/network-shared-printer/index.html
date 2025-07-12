@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>本地USB打印机网络共享 | GG.咕咕の备忘录</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/pwa/favicon.png"><!-- index.css--><link rel="stylesheet" href="/css/index.css?v=3.0.18"><!-- inject head--><link rel="canonical" href="http://hexo.maimaioo.top/2023/06/17/network-shared-printer/index.html"><link rel="stylesheet" href="https://fastly.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="![文章大纲](https:&amp;#x2F;&amp;#x2F;chevereto.maimaioo.top&amp;#x2F;images&amp;#x2F;2025&amp;#x2F;04&amp;#x2F;08&amp;#x2F;main_point.png 缘起：前段时间我放高考假回了一趟初中校园，看到小办公室里的老师打印文件需要先将文件通过U盘或QQ等文件传输工具将文件发到连接USB打印机的电脑上再进行打印，"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="GG.咕咕の备忘录"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/pwa/favicon.png"><link rel="apple-touch-icon" href="/img/pwa/favicon.png" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.18' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>let mdate = "4-4,7-7,9-18,12-13";
+mdate = (mdate.split(","));
+let ndate = new Date();
+for (let i of mdate) {
+    if (i === (ndate.getMonth()+1) + "-" + (ndate.getDate())) {
+        document.documentElement.classList.add('memorial');
+    }
+}
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+          },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><!-- global head--><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-03-19 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: ["你一定可以的"],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: {"jump":"404 Not Found","back":"ヾ(≧∇≦*)ゝ你终于回来了"},
+    expire: false,
+};</script><!-- page-config head--><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><!-- universe--><!-- background img--><!-- loading--><!-- console--><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux云服务器<sup>1</sup></a><a href="/tags/note/">note<sup>1</sup></a><a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%A2%83%E5%A4%96Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">腾讯云 境外Linux云服务器<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2023/11/"><span class="date">2023/11</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2023/09/"><span class="date">2023/09</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2023/06/"><span class="date">2023/06</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2023/03/"><span class="date">2023/03</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><!-- sidebar--><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">0</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>全部文章</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/equipment/"><i class="solitude  fas fa-laptop"></i><span>我的装备</span></a></li><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于我</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">Linux云服务器<sup>1</sup></a><a href="/tags/note/">note<sup>1</sup></a><a href="/tags/%E8%85%BE%E8%AE%AF%E4%BA%91-%E5%A2%83%E5%A4%96Linux%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">腾讯云 境外Linux云服务器<sup>1</sup></a></div></div><span class="sidebar-menu-item-title">网站信息</span><div class="webinfo"><div class="webinfo-item"><div class="item-name">全站字数 :</div><div class="item-count">6.4k</div></div></div></div></div><!-- keyboard--><!-- righhtside--><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a id="site-name" href="/" title="返回博客主页"><span class="title">GG.咕咕の备忘录</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">本地USB打印机网络共享</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>首页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>文库</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="solitude  fas fa-folder-closed"></i><span>全部文章</span></a></li><li><a class="site-page child" href="/categories/"><i class="solitude  fas fa-clone"></i><span>全部分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="solitude  fas fa-tags"></i><span>全部标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>友链</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/links/"><i class="solitude  fas fa-user-group"></i><span>友情链接</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span>关于</span></a><ul class="menus_item_child"><li><a class="site-page child" href="/equipment/"><i class="solitude  fas fa-laptop"></i><span>我的装备</span></a></li><li><a class="site-page child" href="/about/"><i class="solitude  fas fa-user"></i><span>关于我</span></a></li></ul></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav><div class="coverdiv" id="coverdiv"><img class="nolazyload" id="post-cover" src="https://chevereto.maimaioo.top/images/2025/04/08/0002.jpg" alt="本地USB打印机网络共享"></div><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">本地USB打印机网络共享</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-wordcount"><i class="post-meta-icon solitude fas fa-file-word" title="文章字数"></i><span class="word-count">2.9k</span><span class="post-meta-separator"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content article-container"><p>![文章大纲](<a target="_blank" rel="noopener" href="https://chevereto.maimaioo.top/images/2025/04/08/main_point.png">https://chevereto.maimaioo.top/images/2025/04/08/main_point.png</a></p>
+<h1 id="缘起："><a href="#缘起：" class="headerlink" title="缘起："></a>缘起：</h1><p>前段时间我放高考假回了一趟初中校园，看到小办公室里的老师打印文件需要先将文件通过U盘或QQ等文件传输工具将文件发到连接USB打印机的电脑上再进行打印，过程十分繁琐，于是我就利用现有的技术和方案帮他们将USB打印机共享到局域网中，方便了办公室内的老师打印。顺便也借这个机会写这篇Blog。</p>
+<h1 id="将本地USB打印机共享到局域网中的三个方案-目前我已知的"><a href="#将本地USB打印机共享到局域网中的三个方案-目前我已知的" class="headerlink" title="将本地USB打印机共享到局域网中的三个方案(目前我已知的)"></a>将本地USB打印机共享到局域网中的三个方案(目前我已知的)</h1><ol>
+<li>钉钉的智能云打印服务</li>
+<li>windows自带的共享服务</li>
+<li>绿联的打印机网络共享器</li>
+</ol>
+<h1 id="一、钉钉智能云打印服务-相关文件下载地址"><a href="#一、钉钉智能云打印服务-相关文件下载地址" class="headerlink" title="一、钉钉智能云打印服务(相关文件下载地址)"></a>一、钉钉智能云打印服务(<a target="_blank" rel="noopener" href="https://maimaioo-my.sharepoint.com/:f:/g/personal/admin_maimaioo_onmicrosoft_com/Ema611zTUPlCqD94pjp9AR4Bp97dGaQK-NI7Vadj2uzBZg?e=w7AiYe">相关文件下载地址</a>)</h1><h2 id="详细操作流程："><a href="#详细操作流程：" class="headerlink" title="详细操作流程："></a>详细操作流程：</h2><h3 id="1、服务端："><a href="#1、服务端：" class="headerlink" title="1、服务端："></a>1、服务端：</h3><p>在连接着打印机的电脑里运行”DingTalkIs_安装在连接打印机的电脑上“安装在连接打印机的电脑上.exe”程序，一路下一步等待安装完毕。运行软件等待初始化完毕并搜索添加打印机，点击下一步扫描绑定组织&#x2F;团队中。完成绑定后会自动打印出一份钉钉智能云打印机的使用指引，到这里服务端的就配置完了。</p>
+<h3 id="2、客户端-插件-："><a href="#2、客户端-插件-：" class="headerlink" title="2、客户端(插件)："></a>2、客户端(插件)：</h3><p>在日常使用的电脑里面运行”cloud_printer_plugin(插件)_安装在日常使用的电脑上.exe”程序，等待进度条跑完就代表安装完了，如果不确认是否已经安装好的，可以到打印机与扫描仪<img src="https://chevereto.maimaioo.top/images/2025/04/08/dingtalk_print_0.jpg" alt="(win10中的叫法，设置——设备——打印机与扫描仪)">查看是否出现”钉钉云智能打印机”的打印机，也可以选择去新建一个文档，在打印选项页里查看。</p>
+<h3 id="3、钉钉应用内打印"><a href="#3、钉钉应用内打印" class="headerlink" title="3、钉钉应用内打印"></a>3、钉钉应用内打印</h3><p>在钉钉里面预览文件，在更多中有一个”云打印”的选项，现在好打印机后可以开始远程打印文件了</p>
+<p><img src="https://chevereto.maimaioo.top/images/2025/04/08/dingtalk_print_1.jpg"></p>
+<p><img src="https://chevereto.maimaioo.top/images/2025/04/08/dingtalk_print_2.jpg"></p>
+<h2 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h2><p>钉钉智能云打印服务是一项方便快捷的云端打印解决方案，用户可以通过钉钉APP或PC端上传需要打印的文件，并选择打印机进行打印。同时，该服务支持多种文件格式，打印速度快，打印质量高，部署简单，方便用户在不同场景下进行打印。</p>
+<h1 id="二、Windows自带的共享服务"><a href="#二、Windows自带的共享服务" class="headerlink" title="二、Windows自带的共享服务"></a>二、Windows自带的共享服务</h1><h2 id="详细操作步骤："><a href="#详细操作步骤：" class="headerlink" title="详细操作步骤："></a>详细操作步骤：</h2><h3 id="声明：这里以Windows10专业版作为共享服务的服务端-win10其他版本也可以，我只是习惯装专业版，win8-7-XP等系统还未测试过，等有空会挨个去测试"><a href="#声明：这里以Windows10专业版作为共享服务的服务端-win10其他版本也可以，我只是习惯装专业版，win8-7-XP等系统还未测试过，等有空会挨个去测试" class="headerlink" title="声明：这里以Windows10专业版作为共享服务的服务端(win10其他版本也可以，我只是习惯装专业版，win8&#x2F;7&#x2F;XP等系统还未测试过，等有空会挨个去测试)"></a>声明：这里以Windows10专业版作为共享服务的服务端(win10其他版本也可以，我只是习惯装专业版，win8&#x2F;7&#x2F;XP等系统还未测试过，等有空会挨个去测试)</h3><h3 id="1、服务端：-1"><a href="#1、服务端：-1" class="headerlink" title="1、服务端："></a>1、服务端：</h3><h4 id="设置静态ip-自定义主机名："><a href="#设置静态ip-自定义主机名：" class="headerlink" title="设置静态ip+自定义主机名："></a>设置静态ip+自定义主机名：</h4><p>打开设置(快捷键:win+i)，点击网络——以太网，将网络类型改为专用，往下翻查看当前的网络配置，如果显示为”自动(DHCP)”则需要把刚才看到的网络配置记下来(一会填写的时候需要用到的)，但如果显示为”手动”的，恭喜你，可以跳过这里去到自定义主机名那一步。还是这个界面，在ip设置里面有一个编辑的按钮，点击它，将DHCP改为手动，在下面填上你刚才记录下的配置，点击保存。⚠如果在这里提示无法保存，需要到控制面板——网络和Internet——网络和共享中心——更改适配器设置——右键以太网的适配器，选择属性，在属性中双击”Internet 协议版本 4”，在弹出的窗口勾选”使用下面的IP地址”，将刚才记录下来的配置填上去(小tips:如何快速填写子网掩码，在填写完IP地址后按Tab键切到子网掩码一栏，这时会根据IP地址的填写自动补齐子网掩码。首选DNS服务器一般填上第三行默认网关的内容)，填写完后点击完成，这是会短暂性断开网络，这只是代表正在应用网络配置，不是配置有误导致无法上网(除右下角以太网图标出现黄色三角形警告)。</p>
+<p>回到网络和中心，在左侧的导航栏里寻找并点击”更改高级共享设置”，展开公用和专用的选项，将启用网络发现和启用文件和打印机共享勾选上，展开所有网络的选项，将公用文件夹共享启用、有密码保护的共享勾选上，在这可以参考我的配置</p>
+<p><img src="https://chevereto.maimaioo.top/images/2025/04/08/internet_setting_dedicated.png"></p>
+<p><img src="https://chevereto.maimaioo.top/images/2025/04/08/internet_setting_guest.png"></p>
+<p><img src="https://chevereto.maimaioo.top/images/2025/04/08/internet_setting_all.png"></p>
+<p>回到设置，在系统——关于这个选项中有一个”重命名这台电脑”按钮，点击它更改一个好记的名字(方便到时在配置访问端时填写)，根据指引重启设备。到这里就完成了设置静态ip和自定义主机名。</p>
+<h4 id="接入打印机-新建用户-设置共享："><a href="#接入打印机-新建用户-设置共享：" class="headerlink" title="接入打印机+新建用户+设置共享："></a>接入打印机+新建用户+设置共享：</h4><p>右键此电脑，在弹出的选项卡中点击管理，在弹出的控制单元左侧的导航栏中点击”本地用户和组”，双击”用户”文件夹进入，右键点击新用户，填写全名、密码等信息(这个需要记得用户名和密码，到时在访问端认证时要用到)在下面的四个选项中勾选”用户不能更改密码”和”密码永不过期”。</p>
+<p>将打印机的USB线插到电脑上，根据使用书的说明安装驱动，安装完驱动后点击控制面板(查看方式为类别)中的查看设备和打印机，找到需要共享到局域网中的打印机，右键点击打印机属性，在第二个选项卡”共享”中勾选共享此打印机，然后在共享名里更换一个容易辨认的名字，如果单单一台的话可以不改，点击完成后就完成了服务端的配置</p>
+<h4 id="注："><a href="#注：" class="headerlink" title="注："></a>注：</h4><p>部分打印级建议在打印机的选项中的设备管理里将”在以下时间后自动关闭”将时间改为从不。</p>
+<h3 id="2、访问端："><a href="#2、访问端：" class="headerlink" title="2、访问端："></a>2、访问端：</h3><h4 id="方法一："><a href="#方法一：" class="headerlink" title="方法一："></a>方法一：</h4><p>打开运行(快捷键:win+r),输入两个反斜号“\”，接上刚才在服务端设置的ip或主机名回车，在弹出的认证栏处填上新建用户时的用户名和密码登录，然后双击带有打印机图标的文件安装并连接远程打印机。</p>
+<h4 id="方法二："><a href="#方法二：" class="headerlink" title="方法二："></a>方法二：</h4><p>打开此电脑(文件资源管理器，快捷键:win+e)，在上方的地址栏填入两个反斜号”\“，接上刚才在服务端设置的ip或主机名回车，在弹出的认证栏处填上新建用户时的用户名和密码登录，然后双击带有打印机图标的文件安装并连接远程打印机。</p>
+<h2 id="小结：-1"><a href="#小结：-1" class="headerlink" title="小结："></a>小结：</h2><p>Windows共享打印机是一项方便的打印机共享功能，用户可以将一台打印机设置为共享打印机，并允许其他电脑通过网络访问该打印机进行打印。该功能不需要额外的软件或硬件支持，只需在打印机设置中进行简单的配置即可。同时，该功能支持多种操作系统，方便用户在不同设备间进行打印。</p>
+<h2 id="FAQ-常见问题及其解决方法"><a href="#FAQ-常见问题及其解决方法" class="headerlink" title="FAQ(常见问题及其解决方法)"></a>FAQ(常见问题及其解决方法)</h2><h3 id="Q1：显示无法连接到xxx-xxx-xxx-xxx或自定义的主机名"><a href="#Q1：显示无法连接到xxx-xxx-xxx-xxx或自定义的主机名" class="headerlink" title="Q1：显示无法连接到xxx.xxx.xxx.xxx或自定义的主机名"></a>Q1：显示无法连接到xxx.xxx.xxx.xxx或自定义的主机名</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://chevereto.maimaioo.top/images/2025/04/08/faq_1.png"></h3><p>A1：检查访问端的ip地址和服务端的ip地址是否在同一网段(即xxx.xxx.yyy.xxx中的yyy一致)</p>
+<h3 id="Q2-访问端报错无法连接打印机-报错0x0000709"><a href="#Q2-访问端报错无法连接打印机-报错0x0000709" class="headerlink" title="Q2:访问端报错无法连接打印机(报错0x0000709)"></a>Q2:访问端报错无法连接打印机(报错0x0000709)</h3><p>A2:卸载有问题的补丁KB5006667或KB5006670;或对系统的win32spl.dll文件进行替换(<a target="_blank" rel="noopener" href="https://maimaioo-my.sharepoint.com/:f:/g/personal/admin_maimaioo_onmicrosoft_com/Eqb5JgNYhohMlAlud44mlmkBsZ9webt0ivMEZ1YZoOu8uw?e=9e7uh8">一键脚本下载链接</a>)，右键.bat脚本选择以管理员身份运行，等待脚本运行完后重连打印机</p>
+<h3 id="Q3-此用户无法登录，因为该账户当前已被禁用此用户无法登录，因为该账户当前已被禁用或者直接找不到相应的计算机解决办法"><a href="#Q3-此用户无法登录，因为该账户当前已被禁用此用户无法登录，因为该账户当前已被禁用或者直接找不到相应的计算机解决办法" class="headerlink" title="Q3:此用户无法登录，因为该账户当前已被禁用此用户无法登录，因为该账户当前已被禁用或者直接找不到相应的计算机解决办法"></a>Q3:此用户无法登录，因为该账户当前已被禁用此用户无法登录，因为该账户当前已被禁用或者直接找不到相应的计算机解决办法</h3><p>A3:到控制面板，用户账户选项下的凭证管理器，点击Windows凭证，检查是否有与服务端相关凭证。若有，则点击更改，更改上服务端的用户名和密码;若无，则点击添加Windows凭证，填入相关信息保存后尝试重连服务端<img src="https://chevereto.maimaioo.top/images/2025/04/08/faq_2.png"></p>
+<h1 id="三、绿联的打印机网络共享器-摘录自淘宝商品页详情"><a href="#三、绿联的打印机网络共享器-摘录自淘宝商品页详情" class="headerlink" title="三、绿联的打印机网络共享器(摘录自淘宝商品页详情)"></a>三、绿联的打印机网络共享器(摘录自淘宝商品页详情)</h1><h4 id="1、方案一：用有线配网方式-电脑与打印服务器用网线连接"><a href="#1、方案一：用有线配网方式-电脑与打印服务器用网线连接" class="headerlink" title="1、方案一：用有线配网方式(电脑与打印服务器用网线连接)"></a>1、方案一：用有线配网方式(电脑与打印服务器用网线连接)</h4><p>电脑用网线直连USB共享打印服务器，手动将电脑的网络设置成192.168.15.xxx(xxx为2-253任一数值)，子网掩码:255.255.255.0，网关:192.168.15.1，此时可以直接添加网络打印机，网络打印机地址为:192.168.15.1</p>
+<h4 id="2、方案二：用无线配网方式-电脑与打印服务器用wifi连接"><a href="#2、方案二：用无线配网方式-电脑与打印服务器用wifi连接" class="headerlink" title="2、方案二：用无线配网方式(电脑与打印服务器用wifi连接)"></a>2、方案二：用无线配网方式(电脑与打印服务器用wifi连接)</h4><p>电脑连接USB共享打印服务器的AP，名称为PM-UGREEN-XXXX,(XXXX为Mac地址后4位)，初始登录密码为88888888，后续可在管理页面自行修改，此时网络打印机地址为：192.168.16.1</p>
+<h3 id="FAQ："><a href="#FAQ：" class="headerlink" title="FAQ："></a>FAQ：</h3><h4 id="Q1-产品可以适用于哪些设备使用"><a href="#Q1-产品可以适用于哪些设备使用" class="headerlink" title="Q1:产品可以适用于哪些设备使用"></a>Q1:产品可以适用于哪些设备使用</h4><p>A1:产品适用于那些不带网口带USB 接口的打印机需要供多台电脑共享打印，可通过我们产品组建局域网，共享打印机的IP 地址来给局域网内的电脑使用。</p>
+<h4 id="Q2-产品需要安装驱动吗"><a href="#Q2-产品需要安装驱动吗" class="headerlink" title="Q2:产品需要安装驱动吗"></a>Q2:产品需要安装驱动吗</h4><p>A2:产品不需要安装驱动，但是打印机需要安装驱动才能使用，电脑可联网更新打印机驱动，或者去网上下载对应打印机型号的驱动安装。</p>
+<h4 id="Q3-产品支持哪些系统使用"><a href="#Q3-产品支持哪些系统使用" class="headerlink" title="Q3:产品支持哪些系统使用?"></a>Q3:产品支持哪些系统使用?</h4><p>A3:WINXP&#x2F;WIN7&#x2F;WIN8.1&#x2F;WIN10&#x2F;MAC.OS&#x2F;Ubuntu&#x2F;优麒麟等系统，不支持手机使用。</p>
+<h4 id="Q4-产品连接设备，添加打印机不成功是为什么"><a href="#Q4-产品连接设备，添加打印机不成功是为什么" class="headerlink" title="Q4:产品连接设备，添加打印机不成功是为什么"></a>Q4:产品连接设备，添加打印机不成功是为什么</h4><p>A4:1、确认下电脑有没有打印机驱动，一般联网搜索看是否可安装，如果不行，提前去网上下载对应打印机型号的驱动安装。2、确认下打印机IP 地址输入是否正确，可通过产品后台去查看打印机IP，注意设备无线连接产品进入后台的网址是 192.168.16.1，设备用有线连接进入后台的网址是192.168.15.1。(网线直连的方式电脑需要手动设置IP地址为192.168.15.xxx，xxx为2~253)3、如还是无法添加，请联系在线客服</p>
+<h4 id="Q5-产品死机了怎么办"><a href="#Q5-产品死机了怎么办" class="headerlink" title="Q5:产品死机了怎么办?"></a>Q5:产品死机了怎么办?</h4><p>A5:产品有内置一个复位按键，操作如下:1、用长针插入按键孔长按RST 按键 5s 左右，然后松开(不松开不会复位);2、USB-A&#x2F;WI-FI&#x2F;WAN&#x2F;LAN 指示灯会闪一下然后恢复长亮;3、WI-FI 指示灯需等 1.5min 左右才会恢复长亮</p>
+<h4 id="Q6-是否支持扫描功能"><a href="#Q6-是否支持扫描功能" class="headerlink" title="Q6:是否支持扫描功能"></a>Q6:是否支持扫描功能</h4><p>A6:不支持扫描。</p>
+<h4 id="Q7-打印机添加后测试打印为什么打印机一直在打印"><a href="#Q7-打印机添加后测试打印为什么打印机一直在打印" class="headerlink" title="Q7:打印机添加后测试打印为什么打印机一直在打印"></a>Q7:打印机添加后测试打印为什么打印机一直在打印</h4><p>A7:打印机添加后需要去掉“启用双向支持”的勾选</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">GG.咕咕</div><div class="post-copyright__author_desc"></div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title">感谢您的赞赏</span><ul class="reward-group"><li class="reward-item"><a href="/"><img class="post-qr-code-img nolazyload" src="https://chevereto.maimaioo.top/images/2025/04/08/wx.jpg" alt="WeChat" style="border-color: var(--efu-black)"></a><div class="post-qr-code-desc">WeChat</div></li><li class="reward-item"><a href="/"><img class="post-qr-code-img nolazyload" src="https://chevereto.maimaioo.top/images/2025/04/08/zfb.jpg" alt="Alipay" style="border-color: var(--efu-black)"></a><div class="post-qr-code-desc">Alipay</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec">由于您的支持，我才能够有坚持写作的动力。</div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=http%3A%2F%2Fhexo.maimaioo.top%2F2023%2F06%2F17%2Fnetwork-shared-printer%2F&amp;title=%E6%9C%AC%E5%9C%B0USB%E6%89%93%E5%8D%B0%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB&amp;desc=undefined&amp;summary=undefined&amp;site=%E6%9C%AC%E5%9C%B0USB%E6%89%93%E5%8D%B0%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB&amp;pics=https%3A%2F%2Fchevereto.maimaioo.top%2Fimages%2F2025%2F04%2F08%2F0002.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=http%3A%2F%2Fhexo.maimaioo.top%2F2023%2F06%2F17%2Fnetwork-shared-printer%2F&amp;title=%E6%9C%AC%E5%9C%B0USB%E6%89%93%E5%8D%B0%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB&amp;pic=https%3A%2F%2Fchevereto.maimaioo.top%2Fimages%2F2025%2F04%2F08%2F0002.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;http://hexo.maimaioo.top/2023/06/17/network-shared-printer/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">GG.咕咕の备忘录</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/09/10/Aliyun-Linux-DD-WinServer/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">阿里云Linux服务器刷Windows servers 2012 R2</div></div></a></div><div class="next-post pull-right"><a href="/2023/03/19/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">腾讯云境外Linux轻量云服务器刷Windows系统</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="/img/avatar.jpg"></div><div class="description"></div><div class="bottom-group"><span class="left"><div class="name">GG.咕咕</div><div class="desc">城市的边角料，妈妈的小骄傲。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/Maimai06" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/502327371" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BC%98%E8%B5%B7%EF%BC%9A"><span class="toc-text">缘起：</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B0%86%E6%9C%AC%E5%9C%B0USB%E6%89%93%E5%8D%B0%E6%9C%BA%E5%85%B1%E4%BA%AB%E5%88%B0%E5%B1%80%E5%9F%9F%E7%BD%91%E4%B8%AD%E7%9A%84%E4%B8%89%E4%B8%AA%E6%96%B9%E6%A1%88-%E7%9B%AE%E5%89%8D%E6%88%91%E5%B7%B2%E7%9F%A5%E7%9A%84"><span class="toc-text">将本地USB打印机共享到局域网中的三个方案(目前我已知的)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%92%89%E9%92%89%E6%99%BA%E8%83%BD%E4%BA%91%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1-%E7%9B%B8%E5%85%B3%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD%E5%9C%B0%E5%9D%80"><span class="toc-text">一、钉钉智能云打印服务(相关文件下载地址)</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%9A"><span class="toc-text">详细操作流程：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%9A"><span class="toc-text">1、服务端：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF-%E6%8F%92%E4%BB%B6-%EF%BC%9A"><span class="toc-text">2、客户端(插件)：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E9%92%89%E9%92%89%E5%BA%94%E7%94%A8%E5%86%85%E6%89%93%E5%8D%B0"><span class="toc-text">3、钉钉应用内打印</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A"><span class="toc-text">小结：</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Windows%E8%87%AA%E5%B8%A6%E7%9A%84%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1"><span class="toc-text">二、Windows自带的共享服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-text">详细操作步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A3%B0%E6%98%8E%EF%BC%9A%E8%BF%99%E9%87%8C%E4%BB%A5Windows10%E4%B8%93%E4%B8%9A%E7%89%88%E4%BD%9C%E4%B8%BA%E5%85%B1%E4%BA%AB%E6%9C%8D%E5%8A%A1%E7%9A%84%E6%9C%8D%E5%8A%A1%E7%AB%AF-win10%E5%85%B6%E4%BB%96%E7%89%88%E6%9C%AC%E4%B9%9F%E5%8F%AF%E4%BB%A5%EF%BC%8C%E6%88%91%E5%8F%AA%E6%98%AF%E4%B9%A0%E6%83%AF%E8%A3%85%E4%B8%93%E4%B8%9A%E7%89%88%EF%BC%8Cwin8-7-XP%E7%AD%89%E7%B3%BB%E7%BB%9F%E8%BF%98%E6%9C%AA%E6%B5%8B%E8%AF%95%E8%BF%87%EF%BC%8C%E7%AD%89%E6%9C%89%E7%A9%BA%E4%BC%9A%E6%8C%A8%E4%B8%AA%E5%8E%BB%E6%B5%8B%E8%AF%95"><span class="toc-text">声明：这里以Windows10专业版作为共享服务的服务端(win10其他版本也可以，我只是习惯装专业版，win8&#x2F;7&#x2F;XP等系统还未测试过，等有空会挨个去测试)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%EF%BC%9A-1"><span class="toc-text">1、服务端：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E9%9D%99%E6%80%81ip-%E8%87%AA%E5%AE%9A%E4%B9%89%E4%B8%BB%E6%9C%BA%E5%90%8D%EF%BC%9A"><span class="toc-text">设置静态ip+自定义主机名：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A5%E5%85%A5%E6%89%93%E5%8D%B0%E6%9C%BA-%E6%96%B0%E5%BB%BA%E7%94%A8%E6%88%B7-%E8%AE%BE%E7%BD%AE%E5%85%B1%E4%BA%AB%EF%BC%9A"><span class="toc-text">接入打印机+新建用户+设置共享：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%EF%BC%9A"><span class="toc-text">注：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%AE%BF%E9%97%AE%E7%AB%AF%EF%BC%9A"><span class="toc-text">2、访问端：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A"><span class="toc-text">方法一：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A"><span class="toc-text">方法二：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93%EF%BC%9A-1"><span class="toc-text">小结：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FAQ-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E5%8F%8A%E5%85%B6%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95"><span class="toc-text">FAQ(常见问题及其解决方法)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Q1%EF%BC%9A%E6%98%BE%E7%A4%BA%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E5%88%B0xxx-xxx-xxx-xxx%E6%88%96%E8%87%AA%E5%AE%9A%E4%B9%89%E7%9A%84%E4%B8%BB%E6%9C%BA%E5%90%8D"><span class="toc-text">Q1：显示无法连接到xxx.xxx.xxx.xxx或自定义的主机名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-text"></span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q2-%E8%AE%BF%E9%97%AE%E7%AB%AF%E6%8A%A5%E9%94%99%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E6%89%93%E5%8D%B0%E6%9C%BA-%E6%8A%A5%E9%94%990x0000709"><span class="toc-text">Q2:访问端报错无法连接打印机(报错0x0000709)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Q3-%E6%AD%A4%E7%94%A8%E6%88%B7%E6%97%A0%E6%B3%95%E7%99%BB%E5%BD%95%EF%BC%8C%E5%9B%A0%E4%B8%BA%E8%AF%A5%E8%B4%A6%E6%88%B7%E5%BD%93%E5%89%8D%E5%B7%B2%E8%A2%AB%E7%A6%81%E7%94%A8%E6%AD%A4%E7%94%A8%E6%88%B7%E6%97%A0%E6%B3%95%E7%99%BB%E5%BD%95%EF%BC%8C%E5%9B%A0%E4%B8%BA%E8%AF%A5%E8%B4%A6%E6%88%B7%E5%BD%93%E5%89%8D%E5%B7%B2%E8%A2%AB%E7%A6%81%E7%94%A8%E6%88%96%E8%80%85%E7%9B%B4%E6%8E%A5%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9B%B8%E5%BA%94%E7%9A%84%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95"><span class="toc-text">Q3:此用户无法登录，因为该账户当前已被禁用此用户无法登录，因为该账户当前已被禁用或者直接找不到相应的计算机解决办法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BB%BF%E8%81%94%E7%9A%84%E6%89%93%E5%8D%B0%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB%E5%99%A8-%E6%91%98%E5%BD%95%E8%87%AA%E6%B7%98%E5%AE%9D%E5%95%86%E5%93%81%E9%A1%B5%E8%AF%A6%E6%83%85"><span class="toc-text">三、绿联的打印机网络共享器(摘录自淘宝商品页详情)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%96%B9%E6%A1%88%E4%B8%80%EF%BC%9A%E7%94%A8%E6%9C%89%E7%BA%BF%E9%85%8D%E7%BD%91%E6%96%B9%E5%BC%8F-%E7%94%B5%E8%84%91%E4%B8%8E%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E7%BD%91%E7%BA%BF%E8%BF%9E%E6%8E%A5"><span class="toc-text">1、方案一：用有线配网方式(电脑与打印服务器用网线连接)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%96%B9%E6%A1%88%E4%BA%8C%EF%BC%9A%E7%94%A8%E6%97%A0%E7%BA%BF%E9%85%8D%E7%BD%91%E6%96%B9%E5%BC%8F-%E7%94%B5%E8%84%91%E4%B8%8E%E6%89%93%E5%8D%B0%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8wifi%E8%BF%9E%E6%8E%A5"><span class="toc-text">2、方案二：用无线配网方式(电脑与打印服务器用wifi连接)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FAQ%EF%BC%9A"><span class="toc-text">FAQ：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Q1-%E4%BA%A7%E5%93%81%E5%8F%AF%E4%BB%A5%E9%80%82%E7%94%A8%E4%BA%8E%E5%93%AA%E4%BA%9B%E8%AE%BE%E5%A4%87%E4%BD%BF%E7%94%A8"><span class="toc-text">Q1:产品可以适用于哪些设备使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q2-%E4%BA%A7%E5%93%81%E9%9C%80%E8%A6%81%E5%AE%89%E8%A3%85%E9%A9%B1%E5%8A%A8%E5%90%97"><span class="toc-text">Q2:产品需要安装驱动吗</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q3-%E4%BA%A7%E5%93%81%E6%94%AF%E6%8C%81%E5%93%AA%E4%BA%9B%E7%B3%BB%E7%BB%9F%E4%BD%BF%E7%94%A8"><span class="toc-text">Q3:产品支持哪些系统使用?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q4-%E4%BA%A7%E5%93%81%E8%BF%9E%E6%8E%A5%E8%AE%BE%E5%A4%87%EF%BC%8C%E6%B7%BB%E5%8A%A0%E6%89%93%E5%8D%B0%E6%9C%BA%E4%B8%8D%E6%88%90%E5%8A%9F%E6%98%AF%E4%B8%BA%E4%BB%80%E4%B9%88"><span class="toc-text">Q4:产品连接设备，添加打印机不成功是为什么</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q5-%E4%BA%A7%E5%93%81%E6%AD%BB%E6%9C%BA%E4%BA%86%E6%80%8E%E4%B9%88%E5%8A%9E"><span class="toc-text">Q5:产品死机了怎么办?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q6-%E6%98%AF%E5%90%A6%E6%94%AF%E6%8C%81%E6%89%AB%E6%8F%8F%E5%8A%9F%E8%83%BD"><span class="toc-text">Q6:是否支持扫描功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Q7-%E6%89%93%E5%8D%B0%E6%9C%BA%E6%B7%BB%E5%8A%A0%E5%90%8E%E6%B5%8B%E8%AF%95%E6%89%93%E5%8D%B0%E4%B8%BA%E4%BB%80%E4%B9%88%E6%89%93%E5%8D%B0%E6%9C%BA%E4%B8%80%E7%9B%B4%E5%9C%A8%E6%89%93%E5%8D%B0"><span class="toc-text">Q7:打印机添加后测试打印为什么打印机一直在打印</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2023/11/16/Vps-DD-A-new-OS/" title="VPS通过DD脚本安装一个纯净的系统"><div class="thumbnail"><img alt="VPS通过DD脚本安装一个纯净的系统" src="https://chevereto.maimaioo.top/images/2025/04/08/0002.jpg"></div><div class="content"><span class="title" href="/2023/11/16/Vps-DD-A-new-OS/" title="VPS通过DD脚本安装一个纯净的系统">VPS通过DD脚本安装一个纯净的系统</span></div></a><a class="aside-list-item" href="/2023/09/10/nginx-emerg-open/" title="nginx_[emerg]_open()报错"><div class="thumbnail"><img alt="nginx_[emerg]_open()报错" src="https://chevereto.maimaioo.top/images/2025/04/07/0000.jpg"></div><div class="content"><span class="title" href="/2023/09/10/nginx-emerg-open/" title="nginx_[emerg]_open()报错">nginx_[emerg]_open()报错</span></div></a><a class="aside-list-item" href="/2023/09/10/Aliyun-Linux-DD-WinServer/" title="阿里云Linux服务器刷Windows servers 2012 R2"><div class="thumbnail"><img alt="阿里云Linux服务器刷Windows servers 2012 R2" src="https://chevereto.maimaioo.top/images/2025/04/08/0002.jpg"></div><div class="content"><span class="title" href="/2023/09/10/Aliyun-Linux-DD-WinServer/" title="阿里云Linux服务器刷Windows servers 2012 R2">阿里云Linux服务器刷Windows servers 2012 R2</span></div></a><a class="aside-list-item" href="/2023/06/17/network-shared-printer/" title="本地USB打印机网络共享"><div class="thumbnail"><img alt="本地USB打印机网络共享" src="https://chevereto.maimaioo.top/images/2025/04/08/0002.jpg"></div><div class="content"><span class="title" href="/2023/06/17/network-shared-printer/" title="本地USB打印机网络共享">本地USB打印机网络共享</span></div></a><a class="aside-list-item" href="/2023/03/19/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F/" title="腾讯云境外Linux轻量云服务器刷Windows系统"><div class="thumbnail"><img alt="腾讯云境外Linux轻量云服务器刷Windows系统" src="https://chevereto.maimaioo.top/images/2025/04/07/0000.jpg"></div><div class="content"><span class="title" href="/2023/03/19/%E8%85%BE%E8%AE%AF%E4%BA%91%E5%A2%83%E5%A4%96Linux%E8%BD%BB%E9%87%8F%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%88%B7Windows%E7%B3%BB%E7%BB%9F/" title="腾讯云境外Linux轻量云服务器刷Windows系统">腾讯云境外Linux轻量云服务器刷Windows系统</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By&nbsp;<a class="footer-bar-link" href="/"><img class="author-avatar" src="/img/pwa/favicon.png">GG.咕咕</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://beian.miit.gov.cn/" title="琼ICP备2024039522号-1"><span class="beian-name">琼ICP备2024039522号-1</span></a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude">主题：Solitude</a></div></div></div></div></footer></div><!-- right_menu--><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div><!-- inject body--><div><script src="/js/utils.js?v=3.0.18"></script><script src="/js/main.js?v=3.0.18"></script><script src="/js/third_party/waterfall.min.js?v=3.0.18"></script><script src="https://fastly.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><script src="/js/tw_cn.js?v=3.0.18"></script><script src="https://fastly.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://fastly.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><script src="/js/right_menu.js?v=3.0.18"></script><div class="js-pjax"></div></div><!-- pjax--><script>const pjax = new Pjax({
+    elements: 'a:not([target="_blank"])',
+    selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+    cacheBust: false,
+    analytics: false,
+    scrollRestoration: false
+})
+
+document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+})
+
+document.addEventListener('pjax:complete', () => {
+    window.refreshFn()
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+})
+
+document.addEventListener('pjax:error', (e) => {
+    if (e.request.status === 404) {
+        pjax.loadUrl('/404.html')
+    }
+})</script><!-- google adsense--><!-- search--><!-- music--></body></html>
+        <script>
+            const posts = ["2023/11/16/Vps-DD-A-new-OS/","2023/09/10/nginx-emerg-open/","2023/09/10/Aliyun-Linux-DD-WinServer/","2023/06/17/network-shared-printer/","2023/03/19/腾讯云境外Linux轻量云服务器刷Windows系统/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
